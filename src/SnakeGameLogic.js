@@ -62,10 +62,12 @@ SnakeGameLogic.prototype.nextState = function() {
   if (this.fruit.x === this.joints[0].x && this.fruit.y === this.joints[0].y) {
     this.joints.push({ x, y });
     this.fruit.x = Math.floor(Math.random() * 20);
-    this.fruit.y = Math.floor(Math.random() * 15)
+    this.fruit.y = Math.floor(Math.random() * 15);
   } else if (this.joints[0].x >= COLS || this.joints[0].x < 0) {
     return false;
   } else if (this.joints[0].y >= ROWS || this.joints[0].y < 0) {
+    return false;
+  } else if (this.joints.slice(1).some(item => item.x === this.joints[0].x && item.y === this.joints[0].y)) {
     return false;
   }
   return true;
